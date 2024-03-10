@@ -8,10 +8,11 @@ mp_hands = mp.solutions.hands
 screen_width, screen_height = pyautogui.size()
 scaling_factor = screen_width / 0.9
 
-alpha = 0.5  # Smoothing factor (0 to 1, higher means smoother)
+alpha = 0.7  # Smoothing factor (0 to 1, higher means smoother)
 smoothed_landmarks = None
 
 # For webcam input:
+
 cap = cv2.VideoCapture(0)
 with mp_hands.Hands(
     min_detection_confidence=0.5,
@@ -66,7 +67,7 @@ with mp_hands.Hands(
             print("Error moving mouse pointer. Ignoring.")
         
         distance = ((index_tip_x - thumb_tip_x) ** 2 + (index_tip_y - thumb_tip_y) ** 2) ** 0.5
-        if distance < 0.07:  # If fingers are close enough (approximate)
+        if distance < 0.05:  # If fingers are close enough (approximate)
           pyautogui.click()
     cv2.imshow('Handtracking', image)
     if cv2.waitKey(5) & 0xFF == 27:
